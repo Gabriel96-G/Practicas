@@ -1,0 +1,18 @@
+Ejercicio 1 ==========================
+
+Tenemos tres examenes distintos con el mismo porcentaje
+Y se debe determinar el promedio
+
+Definir las variables de los examenes
+examen1
+examen2
+examen3
+
+Solicitar las notas de los examenes al profesor
+
+Se procede a calcular el promedio de los examenes
+Basandose en la formula
+( examen1 + examen2 + examen3 ) / 3
+
+imprimir resultado
+
