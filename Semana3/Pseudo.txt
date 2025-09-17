@@ -1,0 +1,101 @@
+Ejercicio 2 - Estructuras Secuenciales
+
+-tenemos un precio por noche de $100
+-La cantidad de noches a quedarse se le 
+solicita al usuario como un numero enteros
+-El descuento es fijo en un 5%
+-Guardaremos el resultado del precio final 
+en una variable que se llame total_a_cobrar
+
+0. Declaraciòn de las variables
+1. Le pedimos al usuario cuantas noches va a estar
+2. Realizar del total a cobrar
+   en este caso es 
+   cant_noches * precio_habitacion * (1 - descuento/100)
+ 
+   total = cant_noches * precio_habitacion 
+   total = total * descuento
+
+3. Imprimir el resultado del total
+
+---------------------
+Ejemplos
+floats = 100.00
+64 bits  Entero abarca los 60 bits - 4 bits para el signo
+Float 128 bits 64 bits...
+
+
+Códigos posibles:
+noches = int(input("¿Cuántas noches se quedó en el hotel? "))
+
+
+
+
+
+
+# Salida de datos
+
+
+
+Ejercicio 3 - Estructuras Secuenciales
+Declaramos variables
+peso = 0.0
+estatura = 0.0
+nombre = ""
+imc = 0.0
+
+Pedir datos al usuario peso, estatura y nombre
+
+Realizamos el calculo del imc 
+(peso / (estatura)^2)
+
+Imprimimos el saludo con el nombre y el resultado 
+
+
+Maneras de hacer este print
+print(f "Hola {nombre}!, su IMC es de : {imc}")
+print(f"Hola {nombre}!, su IMC es de : {imc}")
+print(f"Hola {nombre}!, su IMC es de : {imc:.2f}")
+print("Hola  " + nombre + "!, su IMC es de : " + str(imc))
+
+
+
+Sustituye estos:
+
+print("Nombre:", nombre)
+print("Peso:", peso)
+print("Altura:", altura)
+print("IMC:", imc)
+
+
+---------------------------------------------------
+
+
+Practica en clase
+
+------------------------------------------------------
+Practica 1:
+
+Declaraciòn de las variables:
+Impuesto
+Precio_de_Producto
+Precio_final
+Nombre_de_Producto
+
+
+
+Nombre_de_Producto + Precio_de_Producto
+
+
+Calcular el monto del impuesto:
+Precio_final = Precio_de_Producto * impuesto
+
+-----------------------------------------------------
+
+Declaraciòn de las variables:
+Kilometro_Antes
+Kilometro_Despues
+Diferencia_de_Distancia
+
+Diferencia_de_Distancia = Kilometro_Despues - Kilometro_Antes
+
