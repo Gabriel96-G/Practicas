@@ -97,5 +97,113 @@ Kilometro_Antes
 Kilometro_Despues
 Diferencia_de_Distancia
 
-Diferencia_de_Distancia = Kilometro_Despues - Kilometro_Antes
+ Diferencia_de_Distancia = Kilometro_Despues - Kilometro_Antes
+
+Imprimir  la cantidad de kilómetros de un viaje en carro es: 
+
+-----------------------------------------------------------------
+
+
+Declaracion de variables:
+
+edad_elena
+edad_ana
+
+solicitar la edad de elena = 
+
+edad_ana = edad_elena * 2 + 10
+
+Imprimir la edad de Ana dentro de diez años
+
+
+---------------------------------------------------
+
+Declaración de variables:
+
+edad_de_la_abuela_de_Ana_Actual
+edad_del_abuelo_de_Ana
+anno_del_matrimonio
+
+solicitar el año del matrimonio 
+
+edad_de_la_abuela_de_Ana_Actual =  anno_del_matrimonio / ( edad_del_abuelo_de_Ana - 7 ) 
+
+Imprimir la edad de la abuela de Ana hoy
+
+
+
+-----------------------------------
+
+Declaración de variables:
+
+Ganancia_de_Hugo
+Ganancia_de_Paco
+Ganancia_de_Luis
+ganancia_total
+ganancia_por_limonada
+Precio_Limonada
+Costo_Produccion
+Limonadas_Vendidas
+
+Solicitar limonadas vendidas
+
+ganancia_por_limonada = Precio_Limonada - Costo_Produccion
+ganancia_total = ganancia_por_limonada * Limonadas_Vendidas
+
+
+Porcentajes de ganancia
+Ganancia_de_Hugo = ganancia_total * 0.40
+Ganancia_de_Paco = ganancia_total * 0.30
+Ganancia_de_Luis = ganancia_total * 0.30
+
+Imprimir las ganancias de Hugo, Paco y luis
+
+
+-----------------------------------------------------------------
+Declaración de variables:
+
+Salario_Bruto
+Impuesto
+Salario_Neto
+
+
+Solicitar el salario bruto e impuesto
+
+Salario_Neto = Salario_Bruto * Impuesto
+
+Imprimir el salario neto
+
+----------------------------------------
+
+Definir variables :
+
+Nombre_de_Pais
+Cantidad_de_Enfermos
+Cantidad_de_Muertos
+Tasa_de_Mortalidad
+
+Solicitar numero de casos correspondientes
+
+Tasa_de_Mortalidad = (Cantidad_de_Muertos / Cantidad_de_Enfermos) * 100
+
+Imprimir la tasa de mortalidad correspiente en el pais
+
+
+--------------------------------------------------------------------
+
+Declaración de variables:
+
+Costo_de_Automovil_Nuevo
+Ganancia_del_Vendedor
+Impuesto
+Costo_de_Automovil
+
+Solicitar el costo del automovil 
+
+Costo_de_Automovil_Nuevo = Costo_de_Automovil + Ganancia_del_Vendedor + Impuesto
+
+Imprimir el costo final del cosumidor
+
+
+
 
