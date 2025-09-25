@@ -1,0 +1,49 @@
+Ejemplos: 
+
+1 % 2 = 1
+
+3 % 2 = 0
+
+4 % 2 = 0
+
+
+4 % 2 == 0
+
+30 % 5 == 0
+
+--------------------------------------------------
+
+Ejercicio 1: 
+
+1. Asignar variables  n = 0
+2. Solicitar el numero al usuario y guardarlo en n
+3. Si la operación numero % 2 es igual a 0 
+Entonces imprimir es par
+sino es impar
+
+
+---------
+
+Ejercicio 2: Mayor de dos numeros
+
+1. Declaramos dos variables
+numero1 = 0 y numero2 = 0
+2. Solicitamos datos al usuario de los dos numeros enteros
+3. Comparamos si numero1 es mayor a numero2 
+entonces imprimimos numero1 es mayor a numero2
+sino, si numero1 es igual a numero2, entonces 
+imprimir son iguales
+sino, numero2 es mayor a numero1
+
+------------------------------
+Ejercicio3 - Calificación aprobatoria
+
+1. Declarar la variable nota = 0
+2. Solicitar el dato de la nota al usuario
+3. Comprobar si la nota es mayor o igual a 70, entonces
+     imprimir aprobó, sino, imprimimos reprobó
+
+---------------------------------------
+
+Ejercicio4 - Categoría de edad
+1. Declarar la variable
