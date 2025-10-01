@@ -63,10 +63,3 @@ print("El día de la semana es:", num1 if numero == 1 else
       num5 if numero == 5 else
       num6 if numero == 6 else
       num7 if numero == 7 else "Número inválido")
-
-
-
-
-
-
-
