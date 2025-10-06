@@ -1,3 +1,5 @@
+
+
 # ===== Programa 1: Estado del juego según apilamiento =====
 
 # Declaración de variables
@@ -112,4 +114,4 @@ elif ch == "T":
 else:
     print("Dato de entrada no válido")
 
-
+# ===== Fin del proyecto =====
