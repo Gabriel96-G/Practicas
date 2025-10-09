@@ -15,7 +15,7 @@ def ejecutar_programa():
 
     # Ejecutamos tu archivo original sin modificarlo
     proceso = subprocess.run(
-        ["python", r"C:\Users\amedr\OneDrive\Documents\Cenfotec Python\Principios de Progra I\Borrador_Primeravance.py"],
+        ["python", r"C:\Users\amedr\OneDrive\Documents\Cenfotec Python\Principios de Progra I\Tetris"],
         input=entrada,
         text=True,
         capture_output=True
