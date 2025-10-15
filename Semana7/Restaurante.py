@@ -1,13 +1,19 @@
-def crear_restaurante():
-    nombre = input("Ingrese el nombre del restaurante: ")
-    print(f"Restaurante {nombre} creado con exito")
-    return nombre
+#Bienvenida#
+print("===Bienvenido al sistema de Restaurante del Equipo 2===")
 
-def ordenar_platillo(platillos): 
-    print("===mostrar_platillos===")
+#Creacion del restaurante#
+nombre_restaurante = input("Ingrese el nombre del restaurante: ")
+print(f"Restaurante {nombre_restaurante} creado con exito ")
 
+#Definir platillos, precio y disponibilida#
+platillos = { 
+    "1": {"nombre": "Hamburguesa", "precio": 5.000, "stock": 10},
+    "2": {"nombre": "Pizza", "precio": 8.000, "stock": 5},
+    "3": {"nombre": "Papas fritas", "precio": 3.000, "stock": 15}
 
-
+}
+#Lista donde guardamos las oredenes#
+ordenes = []
 
 while True:
     print("\n===menu===")
@@ -18,21 +24,4 @@ while True:
     print("5. Finalizar una orden")
     print("6. Salir de la orden")
 
-opcion = input("Seleccione una opción")
-
-"""Programa Principal"""
-
-print("===Bienvenido al sistema de Restaurante del Equipo 2===")
-
-nombre_restaurante = input("Ingrese el nombre del restaurante: ")
-print(f"Restaurante {nombre_restaurante} creado con exito ")
-
-"""Diccionario de platillos"""
-platillos = { 
-    "1": {"nombre": "Hamburguesa", "precio": 5.000, "stock": 10},
-    "2": {"nombre": "Pizza", "precio": 8.000, "stock": 5},
-    "3": {"nombre": "Papas fritas", "precio": 3.000, "stock": 15}
-
-}
-
-ordenes = []
+    opcion = input("Seleccione una opción: ")
