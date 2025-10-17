@@ -12,8 +12,73 @@ def mostrar_platillos(platillos):
 
 def crear_orden(platillos, ordenes):
     print("\n===Crear una orden ===")
-    orden = []
+    orden = {"platillos": [] , "estado": "iniciado"}
+    while True:
+        mostrar_platillos(platillos)
+        eleccion = int(input("Ingrese el numero del platillo que desea agregar (0 para terminar): "))
+        if eleccion == 0:
+            break
         
+        if eleccion in platillos and platillos[eleccion]["stock"] > 0:
+            orden["platillos"].append(eleccion)
+            platillos[eleccion]["stock"] -= 1
+            print("Platillo agregado:", platillos[eleccion]["nombre"])
+        else:
+            print("Opción no válida o platillo agotado.")
+    if len(orden["platillos"]) > 0:
+        ordenes.append(orden)
+        print("Orden creada con éxito.")
+    else:
+        print("No se agregaron platillos a la orden.")
+
+def ver_ordenes(ordenes):
+    print("\n===Órdenes actuales===")
+
+    if len(ordenes) == 0:
+        print("No hay órdenes.")
+    else: 
+        for i, orden in enumerate(ordenes):
+            print(f"Orden {i+1}: Estado: {orden['estado']}, Platillos: {orden['platillos']}")
+
+
+def cambiar_estado(ordenes):
+    print("\n===Cambiar estado de una orden===")
+    if len(ordenes) == 0:
+        print("No hay órdenes para cambiar estado.")
+    else:
+        for i, O in enumerate(ordenes):
+            print(f"{i+1}. Estado: {O['estado']}, Platillos: {O['platillos']}")
+        eleccion = int(input("Seleccione el número de la orden para cambiar estado: "))
+        if eleccion >= 1 and eleccion <= len(ordenes):
+            nuevo_estado = input("Ingrese el nuevo estado (iniciado, en preparacion, finalizado): ")
+            ordenes[eleccion - 1] ["estado"] = nuevo_estado
+            print("Estado actualizado.")
+        else:
+            print("Número de orden no válido.") 
+
+
+
+def finalizar_orden(ordenes):
+    print("\n===Finalizar una orden===")
+    if len(ordenes) == 0:
+        print("No hay órdenes registradas.")
+    else:
+        for i, O in enumerate(ordenes):
+            print(f"{i+1}. Estado: {O['estado']}, Platillos: {O['platillos']}")
+        eleccion = int(input("Seleccione el número de la orden para finalizar: "))
+        if eleccion >= 0 and eleccion <= len(ordenes):
+            orden = ordenes[eleccion-1]
+            total = 0
+            for p in orden["platillos"]:
+                total += platillos[p]["precio"]
+                print(f"El total de la orden es: {total}")
+                print("Orden finalizada y eliminada del sistema.")
+                ordenes.pop(eleccion-1)
+        else:
+            print("Número de orden inválido.")
+
+
+
 def menu_principal(nombre_restaurante, platillos, ordenes):
     while True:
         print("\n--- MENÚ PRINCIPAL ---")
@@ -57,5 +122,5 @@ platillos = {
 ordenes = []
 
 menu_principal(nombre_restaurante, platillos, ordenes)
-
+ 
 

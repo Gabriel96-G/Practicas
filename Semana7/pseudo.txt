@@ -1,0 +1,38 @@
+def cambiar_estado(ordenes):
+    print("\n===Cambiar estado de una orden===")
+    if len(ordenes) == 0:
+        print("No hay órdenes para cambiar estado.")
+    else:
+        for i, O in enumerate(ordenes):
+            print(f"{i+1}. Estado: {O['estado']}, Platillos: {O['platillos']}")
+        eleccion = int(input("Seleccione el número de la orden para cambiar estado: "))
+        if eleccion >= 1 and eleccion <= len(ordenes):
+            nuevo_estado = input("Ingrese el nuevo estado (iniciado, en preparacion, finalizado): ")
+            ordenes[eleccion - 1] ["estado"] = nuevo_estado
+            print("Estado actualizado.")
+        else:
+            print("Número de orden no válido.") 
+
+
+
+
+
+
+def finalizar_orden(ordenes):
+    print("\n===Finalizar una orden===")
+    if len(ordenes) == 0:
+        print("No hay órdenes registradas.")
+    else:
+        for i, O in enumerate(ordenes):
+            print(f"{i+1}. Estado: {O['estado']}, Platillos: {O['platillos']}")
+        eleccion = int(input("Seleccione el número de la orden para finalizar: "))
+        if eleccion >= 0 and eleccion <= len(ordenes):
+            orden = ordenes[eleccion-1]
+            total = 0
+            for platillos in orden["platillos"]:
+                total += platillos["precio"]
+                print(f"El total de la orden es: {total}")
+                print("Orden finalizada y eliminada del sistema.")
+                ordenes.pop(eleccion-1)
+        else:
+            print("Número de orden inválido.")
