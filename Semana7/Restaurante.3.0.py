@@ -31,7 +31,6 @@ def crear_orden(platillos, ordenes):
     else:
         print("No se agregaron platillos a la orden.")
 
-
 def ver_ordenes(ordenes):
     print("\n===Órdenes actuales===")
 
