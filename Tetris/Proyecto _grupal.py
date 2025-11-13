@@ -15,5 +15,5 @@ while True:
         else: 
             print("Dato no valido, intente ingresar otro dato") 
     else: 
-        print("Dato no valido, intente ingresar otro dato") 
+        print("Dato no valido, intente ingresar otro dato")
 

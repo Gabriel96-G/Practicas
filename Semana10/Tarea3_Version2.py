@@ -23,12 +23,6 @@ def cargar_tareas():
             
     except FileNotFoundError:
         print("No se encontró el archivo de tareas. Se creará uno nuevo al guardar.")
-
-        with open("tareas.txt", "w") as archivo:
-            for tarea in tareas:
-                archivo.write(tarea + "\n")
-                pass # Aquí se escribirán las tareas al guardar
-            print("Tareas guardadas en tareas.txt")
     return tareas
 
 
@@ -77,7 +71,7 @@ def menu():
         opcion = input("Seleccione una opción (1-4): ")
     
         if opcion == "1":
-            cargar_tareas()
+            tareas =cargar_tareas()
         elif opcion == "2":
             agregar_tarea(tareas)
         elif opcion == "3":
@@ -87,3 +81,4 @@ def menu():
             break
         else:
             print("Opción no válida. Intente nuevamente.")
+menu()
