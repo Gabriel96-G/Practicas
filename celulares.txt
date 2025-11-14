@@ -1,0 +1,4 @@
+3082,Iphone,iPhone 15 Pro,900000.0,24
+3591,Samsung,S24,1000000.0,23
+145,Motorola,Motoloco,245500.0,12
+2160,Nokia,N500,560000.0,14
