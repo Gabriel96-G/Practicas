@@ -56,7 +56,7 @@ def imprimir_tablero(tablero, pieza = None, px=0, py=0, puntuacion=0):
     print("controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
 
 # Colocación y colision de piezas
-def coalision_pieza(tablero, pieza, px, py):
+def colision_pieza(tablero, pieza, px, py):
     for (x, y) in pieza:
         tx = px + x
         ty = py + y
@@ -83,7 +83,7 @@ def rotar(pieza):
 def ajustar_pieza(tablero, pieza, px, py):
     desplazamiento = [0, -1, 1, -2, 2]
     for d in desplazamiento:
-        if not coalision_pieza(tablero, pieza, px + d, py):
+        if not colision_pieza(tablero, pieza, px + d, py):
             return px + d, py
     return px, py
 
@@ -144,7 +144,79 @@ def top_tres_puntajes():
     lista.sort(key=lambda x: x[1], reverse=True)
     return lista[:3]
 
-def 
+def juego():
+    tablero = crear_tablero()
+    puntajes = 0
+    tick = ticket_inicial
+    pieza, nombre_p = nueva_pieza_aleatoria()
+    px = ancho // 2
+    py = -1
+    juego_terminado = False
+
+    while True:
+        imprimir_tablero(tablero, pieza, px, py, puntajes)
+        accion = input("Accion: ").strip().lower()
+
+        if accion == 'a':
+            if not colision_pieza(tablero, pieza, px-1, py):
+                px -= 1
+        elif accion == 'd':
+            if not colision_pieza(tablero, pieza, px+1, py):
+                px += 1
+        elif accion == 's':
+            if not colision_pieza(tablero, pieza, px, py+1):
+                py += 1
+        elif accion == 'w':
+            pieza_rot = rotar(pieza)
+            npx, npy = ajustar_pieza(tablero, pieza_rot, px, py)
+            if not colision_pieza(tablero, pieza_rot, npx, npy+1):
+                pieza = pieza_rot
+                px, py = npx, npy
+        else:
+            pass
+
+        if not colision_pieza(tablero, pieza, px, py+1):
+            py += 1
+        else:
+            agregar_pieza_tablero(tablero, pieza, px, py)
+            num_lineas_eliminadas, tablero = limpiar_lineas(tablero)
+            if num_lineas_eliminadas > 0:
+                puntos = puntaje_por_lineas(num_lineas_eliminadas)
+                puntajes += puntos
+                tick = max(0.05, tick *(0.95** num_lineas_eliminadas))
+
+            pieza, nombre_p = nueva_pieza_aleatoria()
+            px = ancho // 2
+            py = -1
+
+            if colision_pieza(tablero, pieza, px, py):
+                imprimir_tablero(tablero, None, 0, 0, puntajes)
+                print("Game Over!!!")
+                print("Tu puntaje es: ", puntajes)
+                nombre = input("Ingrese el nombre del jugador: ").strip()
+                if nombre == "":
+                    nombre = "Anonimo"
+                guardar_puntaje(nombre, puntajes)
+                print("\nTop 3 mejores puntajes:")
+                top = top_tres_puntajes()
+                if not top:
+                    print("No hay puntajes guardados aun.")
+                else:
+                    for i, (n, s) in enumerate(top, start=1):
+                        print(f"{i}. {n} - {s}")
+                    print("Gracias por jugar.")
+                    return
+        time.sleep(tick)
+        if __name__ == "__main__":
+            print("Tetris")
+            print("Controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
+            input("Presiona Enter para iniciar...")
+            juego()
+            print("\n===Juego finalizado=== \nGracias por jugar!!!  \nSaliendo del programa... ")
+            break
+        
+
+
 
 
 
