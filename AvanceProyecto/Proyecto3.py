@@ -207,14 +207,12 @@ def juego():
                     print("Gracias por jugar.")
                     return
         time.sleep(tick)
-        if __name__ == "__main__":
-            print("Tetris")
-            print("Controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
-            input("Presiona Enter para iniciar...")
-            juego()
-            print("\n===Juego finalizado=== \nGracias por jugar!!!  \nSaliendo del programa... ")
-            break
-        
+
+if __name__ == "__main__":
+    print("Tetris")
+    print("Controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
+    input("Presiona Enter para iniciar...")
+    juego()
 
 
 
