@@ -1,0 +1,170 @@
+# # Recursividad
+# # Es una funcion que se llama a si misma, sirve para resolver problemas que se pueden dividir en subproblemas
+# # La recursion tiene 3 bases fundamentales:
+# # 1. Caso Base o Condicion de parada: Es el que permite que la recursion termine
+# # 2. Movimiento de avance: Es el que permite que la recursion se mueva hacia el caso base
+# # 3. Llamada recursiva: Es el que permite que la recursion se llame a si misma
+
+# # Ejemplo de recursion:
+# # No tenemos caso base, no hay movimiento de avance
+# contador = 0
+# while True:
+#     print(contador)
+
+# # Tenemos un caso base, pero no hay movimiento de avance
+
+# contador = 0
+# while True:
+#     if contador >= 10:
+#         break
+#     print(contador)
+
+# # Tenemos un caso base, y hay movimiento de avance
+# contador = 0
+# while True:
+#     if contador >= 10: # Caso base
+#         break
+#     print(contador)
+#     contador += 1 # Movimiento de avance
+
+# Ejemplo de recursion:
+# Definimos la funcion factorial
+# Definimos un caso base
+# Definimos un movimiento de avance -> va con la llamada recursiva
+# def factorial(n):
+#     if n == 0: # Caso base o condicion de finalizacion
+#         return 1
+#     return n * factorial(n-1) # llamada recursiva con el movimiento de avance
+
+# 5 * factorial(4) -> 
+# 5 * 4 * factorial(3) -> 
+# 5 * 4 * 3 * factorial(2) -> 
+# 5 * 4 * 3 * 2 * factorial(1) -> 
+# 5 * 4 * 3 * 2 * 1 * factorial(0) -> 
+# 5 * 4 * 3 * 2 * 1 * 1 -> 120
+
+import turtle
+
+# def dibujar_espiral(tortuga, largo_linea):
+#     if largo_linea >= 500:   #Caso Base
+#         return
+#     tortuga.forward(largo_linea)
+#     tortuga.right(90)
+#     dibujar_espiral(tortuga, largo_linea + 10)
+
+# def dibujar_arbol(tortuga, largo_linea):
+#     if largo_linea >= 100:
+#         return
+#     tortuga.forward(largo_linea)
+#     tortuga.right(20)
+#     dibujar_arbol(tortuga, largo_linea - 1)
+#     tortuga.left(40)
+#     dibujar_arbol(tortuga, largo_linea - 1)
+#     tortuga.right(20)
+
+# tortuga = turtle.Turtle(shape="turtle")
+# tortuga.pensize(2)
+# tortuga.color("red")
+# dibujar_arbol(tortuga, 5)
+# # dibujar_espiral(tortuga, 5)
+# turtle.done()
+
+def suma_lista(lista):
+    suma = 0
+    for elemento in lista:
+        suma += elemento
+    return suma
+
+# Definimos la funcion suma_lista_recursiva
+# Definimos un caso base
+# Definimos un movimiento de avance -> va con la llamada recursiva
+# def suma_lista_recursiva(lista):
+#     if len(lista) == 0: #Caso Base
+#         return 0
+#     return lista[0] + suma_lista_recursiva(lista[1:])
+
+# # [1,2,3,4,5] -> 1 + suma_lista_recursiva([2,3,4,5])
+# # [2,3,4,5] -> 1 + 2 + suma_lista_recursiva([3,4,5])
+# # [3,4,5] -> 1 + 2 + 3 + suma_lista_recursiva([4,5])
+# # [4,5] -> 1 + 2 + 3 + 4 + suma_lista_recursiva([5])
+# # [5] -> 1 + 2 + 3 + 4 + 5 + suma_lista_recursiva([])
+# # [] -> 1 + 2 + 3 + 4 + 5 + 0 -> 15
+# print(suma_lista([1,2,3,4,5]))
+# print(suma_lista_recursiva([1,2,3,4,5]))
+
+"""
+1. Contador regresivo
+Crear una función recursiva que imprima los números desde n hasta 1.
+"""
+# def cuenta_regresiva(n):
+#     #Caso base: cuando n llegue a 0, detenemos la recursion
+#     if n < 0:
+#         print("Error: Debe ingresar un numero positivo")
+#         return
+#     if n == 0:
+#         return
+#     print(n)
+#     cuenta_regresiva(n - 1)
+
+# cuenta_regresiva(-10)
+
+
+# numeros = []
+
+# def cuenta_regresiva(n):
+#     if n == 0:
+#         print(0)
+#         numeros.append(0)
+#         return
+#     numeros.append(n)
+#     print(n)
+#     if n > 0:
+#         cuenta_regresiva(n - 1)
+#     else:
+#         cuenta_regresiva(n + 1)
+
+# n = int(input("Ingrese un número entero (positivo o negativo): "))
+# cuenta_regresiva(n)
+
+# print("Lista generada:", numeros)
+
+"""
+2.Potencia recursiva
+Implementar una función que calcule a^b usando recursión.
+"""
+# def potencia_recursiva(a, b):
+#     if b == 0: # Caso Base
+#         return 1 # Caso Base
+#     return a * potencia_recursiva(a, b-1) # llamada recursiva con el movimiento de avance
+
+"""
+3. Producto recursivo
+Implementar multiplicación de dos números usando solo sumas recursivas.
+"""
+# def producto_recursivo(a, b):
+#     if b == 0: # Caso Base
+#         return 0 # Caso Base
+#     return a + producto_recursivo(a, b-1) # llamada recursiva con el movimiento de avance
+
+"""
+4. Contar dígitos
+Dado un número entero, retornar cuántos dígitos tiene usando recursión.
+12345 -> 5
+213 -> 3
+1000000 -> 7
+"""
+# Definimos la funciòn contar_digitos
+# Definimos un caso base
+# Definimos un movimiento de avance -> va con la llamada recursiva
+def contar_digitos(numero):
+    if numero == 0: # Caso Base
+        return 0 # Caso Base
+    return 1 + contar_digitos(numero // 10)
+
+# 12345 -> 1 + contar_digitos(1234) 
+# -> 1 + 1 + contar_digitos(123) 
+# -> 1 + 1 + 1 + contar_digitos(12) 
+# -> 1 + 1 + 1 + 1 + contar_digitos(1) 
+# -> 1 + 1 + 1 + 1 + 1 + contar_digitos(0) 
+# -> 1 + 1 + 1 + 1 + 1 + 0 -> 5
+
