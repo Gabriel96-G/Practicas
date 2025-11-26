@@ -203,6 +203,9 @@ def juego():
                 pieza = pieza_rotada
                 px = npx
                 py = npy
+        else:
+             continue
+
 
         # Caída automática
         if not colision_pieza(tablero, pieza, px, py + 1):
