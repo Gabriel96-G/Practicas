@@ -2,11 +2,36 @@ import random
 import time
 import os
 
+# Opcional: soporte de colores en Windows (si tienes colorama instalado)
+try:
+    import colorama
+    colorama.init()
+except Exception:
+    pass
+
 # Constantes
 ancho = 10
 alto = 20
 ticket_inicial = 0.5
 archivo_puntajes = "scores.txt"
+
+# Códigos ANSI
+RESET = "\033[0m"
+BOLD = "\033[1m"
+
+# Colores de fondo para cada pieza
+COLOR_BG_PIEZAS = {
+    'I': "\033[106m",  # cian claro
+    'O': "\033[103m",  # amarillo claro
+    'T': "\033[105m",  # magenta claro
+    'L': "\033[43m",   # amarillo
+    'J': "\033[104m",  # azul
+    'S': "\033[102m",  # verde
+    'Z': "\033[101m",  # rojo
+}
+
+COLOR_TEXTO_TITULO = "\033[95m"   # magenta
+COLOR_TEXTO_PUNTAJE = "\033[92m"  # verde
 
 # Piezas
 I = [(-2,0),(-1,0),(0,0),(1,0)]
@@ -25,33 +50,54 @@ def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def crear_tablero():
-    tablero = []
-    for _ in range(alto):
-        tablero.append([0] * ancho)
-    return tablero
+    # 0 = vacío, 'I','O',... = celda ocupada
+    return [[0] * ancho for _ in range(alto)]
 
 def copiar_lista(l):
     return [list(row) for row in l]
 
+def celda_a_str(valor):
+    """Devuelve la representación (con color) de una celda."""
+    if valor == 0:
+        return "  "  # dos espacios: bloque "cuadrado"
+    color = COLOR_BG_PIEZAS.get(valor, "")
+    return f"{color}  {RESET}"
+
 # Dibujar tablero
-def imprimir_tablero(tablero, pieza=None, px=0, py=0, puntuacion=0):
+def imprimir_tablero(tablero, pieza=None, px=0, py=0, puntuacion=0, nombre_pieza=None):
     copia = copiar_lista(tablero)
     if pieza:
         for (x, y) in pieza:
             tx = px + x
             ty = py + y
             if 0 <= ty < alto and 0 <= tx < ancho:
-                copia[ty][tx] = 1
+                # Sobreponemos la pieza actual sobre la copia
+                copia[ty][tx] = nombre_pieza if nombre_pieza else 'X'
 
     limpiar_pantalla()
-    print("Puntaje:", puntuacion)
-    print("=" * (ancho + 4))
 
+    # Encabezado
+    print(f"{COLOR_TEXTO_PUNTAJE}{BOLD}Puntaje:{RESET} {puntuacion}")
+
+    titulo = "TETRIS"
+    total_ancho = ancho * 2 + 4  # 2 chars por celda + bordes <! !>
+    lado = (total_ancho - len(titulo)) // 2
+    borde_izq = "=" * max(lado, 0)
+    borde_der = "=" * max(total_ancho - len(titulo) - len(borde_izq), 0)
+    print(f"{COLOR_TEXTO_TITULO}{BOLD}{borde_izq}{titulo}{borde_der}{RESET}")
+
+    # Filas del tablero
     for fila in copia:
-        linea = "<!" + "".join("#" if c else " " for c in fila) + "!>"
+        linea = "<!" + "".join(celda_a_str(c) for c in fila) + "!>"
         print(linea)
-    print("=" * (ancho + 4))
-    print("Controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
+
+    print("=" * total_ancho)
+    print("\nCONTROLES\n")
+    print(" a = izquierda")
+    print(" d = derecha")
+    print(" s = abajo")
+    print(" w = rotar")
+    print(" [Enter] = aceptar\n")
 
 # Colisiones
 def colision_pieza(tablero, pieza, px, py):
@@ -62,25 +108,23 @@ def colision_pieza(tablero, pieza, px, py):
         if tx < 0 or tx >= ancho or ty >= alto:
             return True
 
-        if ty >= 0 and tablero[ty][tx] == 1:
+        # colisión con cualquier celda no vacía
+        if ty >= 0 and tablero[ty][tx] != 0:
             return True
 
     return False
 
 # Pegar pieza al tablero
-def agregar_pieza_tablero(tablero, pieza, px, py):
+def agregar_pieza_tablero(tablero, pieza, px, py, nombre_pieza):
     for (x, y) in pieza:
         tx = px + x
         ty = py + y
         if 0 <= ty < alto and 0 <= tx < ancho:
-            tablero[ty][tx] = 1
+            tablero[ty][tx] = nombre_pieza
 
 # Rotación
 def rotar(pieza):
-    nueva = []
-    for (x, y) in pieza:
-        nueva.append((-y, x))
-    return nueva
+    return [(-y, x) for (x, y) in pieza]
 
 def ajustar_pieza(tablero, pieza, px, py):
     desplazamiento = [0, -1, 1, -2, 2]
@@ -95,7 +139,8 @@ def limpiar_lineas(tablero):
     eliminadas = 0
 
     for fila in tablero:
-        if all(c == 1 for c in fila):
+        # línea completa si todo es != 0
+        if all(c != 0 for c in fila):
             eliminadas += 1
         else:
             nuevo.append(fila)
@@ -124,7 +169,7 @@ def guardar_puntaje(nombre, puntaje):
     try:
         with open(archivo_puntajes, "a", encoding="utf-8") as f:
             f.write(nombre + "," + str(puntaje) + "\n")
-    except:
+    except Exception:
         print("Error al guardar puntaje.")
 
 def top_tres_puntajes():
@@ -140,11 +185,11 @@ def top_tres_puntajes():
                 nombre = partes[0]
                 try:
                     score = int(partes[1])
-                except:
+                except Exception:
                     continue
 
                 lista.append((nombre, score))
-    except:
+    except Exception:
         return []
 
     lista.sort(key=lambda x: x[1], reverse=True)
@@ -168,7 +213,7 @@ def menu_principal():
         elif opcion == "3":
             return "salir"
         else:
-            input("Opción inválida. Presiona Enter para continuar...")
+            input("Opción inválida.\nPresiona Enter para continuar...")
 
 # Juego principal
 def juego():
@@ -181,7 +226,7 @@ def juego():
     py = -1
 
     while True:
-        imprimir_tablero(tablero, pieza, px, py, puntaje)
+        imprimir_tablero(tablero, pieza, px, py, puntaje, nombre_p)
         accion = input("Accion: ").strip().lower()
 
         if accion == "a":
@@ -203,16 +248,21 @@ def juego():
                 pieza = pieza_rotada
                 px = npx
                 py = npy
+
+        elif accion == "":
+            # Enter sin comando: no hacemos nada extra
+            pass
+
         else:
-             continue
-            
+            print("\nERROR: tecla inválida. Usa solo a, d, s, w o Enter.")
+            input("Presiona Enter para continuar...")
+            continue
 
-
-        # Caída automática
+        # Caída "automática" (en cada ciclo de entrada)
         if not colision_pieza(tablero, pieza, px, py + 1):
             py += 1
         else:
-            agregar_pieza_tablero(tablero, pieza, px, py)
+            agregar_pieza_tablero(tablero, pieza, px, py, nombre_p)
 
             tablero, lineas = limpiar_lineas(tablero)
             if lineas > 0:
@@ -241,12 +291,12 @@ def juego():
                     print(i, ".", n, "-", s)
 
                 print("\n¿Quieres jugar otra vez?")
-                print("s = sí")
-                print("n = no")
+                print("si = seguir jugando")
+                print("no = salir del juego")
 
                 opcion = input("Elige: ").strip().lower()
 
-                if opcion == "s":
+                if opcion == "si":
                     return "otra_vez"
                 else:
                     return
@@ -277,5 +327,5 @@ if __name__ == "__main__":
             input("\nPresiona Enter para volver al menú...")
 
         elif eleccion == "salir":
-            print("Gracias por jugar. ¡Hasta pronto!")
+            print("Gracias por jugar. \n¡Hasta pronto!")
             break

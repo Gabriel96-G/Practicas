@@ -45,13 +45,18 @@ def imprimir_tablero(tablero, pieza=None, px=0, py=0, puntuacion=0):
 
     limpiar_pantalla()
     print("Puntaje:", puntuacion)
-    print("=" * (ancho + 4))
+
+    titulo = "TETRIS"
+    lado = (ancho + 4 - len(titulo)) // 2
+    print("=" * lado + titulo + "=" * lado)
+    
 
     for fila in copia:
         linea = "<!" + "".join("#" if c else " " for c in fila) + "!>"
         print(linea)
+
     print("=" * (ancho + 4))
-    print("Controles: a=izquierda, d=derecha, s=abajo, w=rotar, [enter]=nada")
+    print("\nCONTROLES\n \na=izquierda \nd=derecha \ns=abajo \nw=rotar \n[enter]=Aceptar\n")
 
 # Colisiones
 def colision_pieza(tablero, pieza, px, py):
@@ -168,7 +173,7 @@ def menu_principal():
         elif opcion == "3":
             return "salir"
         else:
-            input("Opción inválida. Presiona Enter para continuar...")
+            input("Opción inválida.\nPresiona Enter para continuar...")
 
 # Juego principal
 def juego():
@@ -204,9 +209,9 @@ def juego():
                 px = npx
                 py = npy
         else:
-             continue
-            
-
+            print("\nERROR: tecla inválida. Usa solo a, d, s, w o Enter.")
+            input("Presiona Enter para continuar...")
+            continue
 
         # Caída automática
         if not colision_pieza(tablero, pieza, px, py + 1):
@@ -229,6 +234,7 @@ def juego():
                 print("Game Over!!!")
                 print("Tu puntaje es:", puntaje)
 
+
                 nombre = input("Nombre del jugador: ").strip()
                 if nombre == "":
                     nombre = "Anonimo"
@@ -241,12 +247,12 @@ def juego():
                     print(i, ".", n, "-", s)
 
                 print("\n¿Quieres jugar otra vez?")
-                print("s = sí")
-                print("n = no")
+                print("si = seguir jugando")
+                print("no = salir del juego")
 
                 opcion = input("Elige: ").strip().lower()
 
-                if opcion == "s":
+                if opcion == "si":
                     return "otra_vez"
                 else:
                     return
@@ -277,5 +283,5 @@ if __name__ == "__main__":
             input("\nPresiona Enter para volver al menú...")
 
         elif eleccion == "salir":
-            print("Gracias por jugar. ¡Hasta pronto!")
+            print("Gracias por jugar. \n¡Hasta pronto!")
             break
